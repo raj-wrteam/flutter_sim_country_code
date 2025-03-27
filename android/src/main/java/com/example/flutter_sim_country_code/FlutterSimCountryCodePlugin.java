@@ -12,21 +12,11 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.BinaryMessenger;
 
-// This keeps backward compatibility with the old plugin registration
-import io.flutter.plugin.common.PluginRegistry.Registrar;
-
 public class FlutterSimCountryCodePlugin implements FlutterPlugin, MethodCallHandler {
     private MethodChannel channel;
     private Context applicationContext;
 
-    // This static function is optional and equivalent to onAttachedToEngine.
-    // It supports the old pre-Flutter-1.12 Android projects.
-    @SuppressWarnings("deprecation")
-    public static void registerWith(Registrar registrar) {
-        final FlutterSimCountryCodePlugin instance = new FlutterSimCountryCodePlugin();
-        instance.setupChannel(registrar.messenger(), registrar.context());
-    }
-
+    // This now only supports Flutter embedding v2
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         setupChannel(flutterPluginBinding.getBinaryMessenger(), flutterPluginBinding.getApplicationContext());
